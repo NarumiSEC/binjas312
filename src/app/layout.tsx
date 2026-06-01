@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   description:
     "Portal resmi pendaftaran Bina Jasmani Binjas 312 Kalahitam. Program pembinaan fisik, psikologi, dan akademik.",
   robots: { index: true, follow: true },
+  // Tambahkan baris di bawah ini:
+  verification: {
+    google: 'gADHYdWYYhphkeAK0pWw_kRnyZ5rtS0st_aBGc5M-08',
+  },
 };
 
 export default function RootLayout({
