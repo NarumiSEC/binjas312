@@ -50,8 +50,13 @@ export async function checkAuthRateLimit(identifier: string): Promise<{
 }> {
   const limiter = getUpstashLimiter();
   if (limiter) {
-    const result = await limiter.limit(identifier);
-    return { success: result.success, remaining: result.remaining };
+    try {
+      const result = await limiter.limit(identifier);
+      return { success: result.success, remaining: result.remaining };
+    } catch (error) {
+      console.error("[rate-limit] Upstash error, allowing request:", error);
+      return { success: true, remaining: 1 };
+    }
   }
   if (process.env.NODE_ENV === "production") {
     console.warn(

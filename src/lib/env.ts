@@ -15,11 +15,24 @@ export function getAuthSecret(): string {
   );
 }
 
+function cleanEnv(value: string | undefined): string {
+  if (!value) return "";
+  return value.trim().replace(/^["']|["']$/g, "");
+}
+
 export function isSupabaseConfigured(): boolean {
   return Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() &&
-      process.env.SUPABASE_SERVICE_ROLE_KEY?.trim(),
+    cleanEnv(process.env.NEXT_PUBLIC_SUPABASE_URL) &&
+      cleanEnv(process.env.SUPABASE_SERVICE_ROLE_KEY),
   );
+}
+
+export function getSupabaseUrl(): string {
+  return cleanEnv(process.env.NEXT_PUBLIC_SUPABASE_URL);
+}
+
+export function getSupabaseServiceRoleKey(): string {
+  return cleanEnv(process.env.SUPABASE_SERVICE_ROLE_KEY);
 }
 
 export function getAppUrl(): string {

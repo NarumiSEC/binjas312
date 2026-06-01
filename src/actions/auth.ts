@@ -27,7 +27,7 @@ export async function registerUser(
     return {
       success: false,
       error:
-        "Database belum dikonfigurasi. Hubungi admin atau periksa file .env.local",
+        "Database belum dikonfigurasi di server. Isi SUPABASE_SERVICE_ROLE_KEY di Vercel lalu Redeploy.",
     };
   }
 
@@ -45,44 +45,70 @@ export async function registerUser(
     password: parsed.data.password,
   };
 
-  const supabase = getSupabaseAdmin();
-  const password_hash = await hashPassword(data.password);
+  try {
+    const supabase = getSupabaseAdmin();
+    const password_hash = await hashPassword(data.password);
 
-  const { error } = await supabase.from("users").insert({
-    nama: data.nama,
-    email: data.email,
-    no_hp: data.no_hp,
-    nik: data.nik,
-    password_hash,
-    email_verified: false,
-  });
+    const { error } = await supabase.from("users").insert({
+      nama: data.nama,
+      email: data.email,
+      no_hp: data.no_hp,
+      nik: data.nik,
+      password_hash,
+      email_verified: false,
+    });
 
-  if (error) {
-    if (error.code === "23505") {
+    if (error) {
+      if (error.code === "23505") {
+        return {
+          success: false,
+          error: "Email atau NIK sudah terdaftar.",
+        };
+      }
+      if (error.code === "23514") {
+        return {
+          success: false,
+          error:
+            "Format data tidak valid. NIK 16 digit angka, HP 10–15 digit angka, email valid.",
+        };
+      }
+      if (error.code === "PGRST205" || error.message?.includes("schema cache")) {
+        return {
+          success: false,
+          error:
+            "Tabel database belum dibuat. Jalankan migrasi SQL di Supabase.",
+        };
+      }
+      if (
+        error.code === "42501" ||
+        error.message?.includes("Invalid API key") ||
+        error.message?.includes("JWT")
+      ) {
+        return {
+          success: false,
+          error:
+            "API key Supabase salah. Di Vercel pakai service_role (bukan anon key).",
+        };
+      }
+      console.error("[register]", error);
       return {
         success: false,
-        error: "Email atau NIK sudah terdaftar.",
+        error: `Pendaftaran gagal (${error.code ?? "error"}). Cek /api/health/db`,
       };
     }
-    if (error.code === "PGRST205" || error.message?.includes("schema cache")) {
+  } catch (e) {
+    console.error("[register] unexpected", e);
+    const msg = e instanceof Error ? e.message : "unknown";
+    if (msg.includes("Missing Supabase") || msg.includes("dikonfigurasi")) {
       return {
         success: false,
         error:
-          "Tabel database belum dibuat. Admin harus menjalankan migrasi SQL di Supabase (lihat docs/SETUP.md).",
+          "Database belum terhubung di Vercel. Isi SUPABASE_SERVICE_ROLE_KEY lalu Redeploy.",
       };
     }
-    if (error.code === "42501") {
-      return {
-        success: false,
-        error: "Akses database ditolak. Periksa SUPABASE_SERVICE_ROLE_KEY di .env.local.",
-      };
-    }
-    console.error("[register]", error);
-    const devHint =
-      process.env.NODE_ENV === "development" ? ` (${error.code}: ${error.message})` : "";
     return {
       success: false,
-      error: `Pendaftaran gagal. Silakan coba lagi.${devHint}`,
+      error: `Pendaftaran gagal: ${msg.slice(0, 120)}`,
     };
   }
 

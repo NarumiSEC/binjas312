@@ -1,5 +1,9 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { isSupabaseConfigured } from "@/lib/env";
+import {
+  isSupabaseConfigured,
+  getSupabaseUrl,
+  getSupabaseServiceRoleKey,
+} from "@/lib/env";
 
 let adminClient: SupabaseClient | null = null;
 
@@ -13,8 +17,8 @@ export function getSupabaseAdmin(): SupabaseClient {
     );
   }
 
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!.trim();
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY!.trim();
+  const url = getSupabaseUrl();
+  const key = getSupabaseServiceRoleKey();
 
   if (!adminClient) {
     adminClient = createClient(url, key, {
