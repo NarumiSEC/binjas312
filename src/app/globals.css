@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0d1f12;
+  --foreground: #e8efe8;
+  --army-950: #0a1610;
+  --army-900: #0d1f12;
+  --army-800: #1b4332;
+  --army-700: #2d6a4f;
+  --army-600: #40916c;
+  --army-500: #52b788;
+  --army-400: #74c69d;
+  --army-300: #95d5b2;
+  --army-200: #b7e4c7;
+  --army-100: #d8f3dc;
+  --gold-600: #c9a227;
+  --gold-500: #d4af37;
+  --gold-400: #e6c65a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-army-950: var(--army-950);
+  --color-army-900: var(--army-900);
+  --color-army-800: var(--army-800);
+  --color-army-700: var(--army-700);
+  --color-army-600: var(--army-600);
+  --color-army-500: var(--army-500);
+  --color-army-400: var(--army-400);
+  --color-army-300: var(--army-300);
+  --color-army-200: var(--army-200);
+  --color-army-100: var(--army-100);
+  --color-gold-600: var(--gold-600);
+  --color-gold-500: var(--gold-500);
+  --color-gold-400: var(--gold-400);
+  --font-sans: var(--font-source-sans);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+}
