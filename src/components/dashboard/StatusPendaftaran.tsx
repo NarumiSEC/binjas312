@@ -68,8 +68,7 @@ export function StatusPendaftaran({ user, registration }: Props) {
         </h3>
         <p className="mt-2 text-white">{nextSchedule}</p>
         <p className="mt-2 text-xs text-army-400">
-          Jadwal resmi akan diumumkan melalui dashboard dan kontak WhatsApp
-          terdaftar.
+          Silahkan Dm Nomor Dibawah Ini +62 831 4833 8260 untuk informasi lebih lanjut.
         </p>
       </section>
     </div>
