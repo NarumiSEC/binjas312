@@ -93,7 +93,7 @@ export async function registerUser(
       console.error("[register]", error);
       return {
         success: false,
-        error: `Pendaftaran gagal (${error.code ?? "error"}). Cek /api/health/db`,
+        error: `Pendaftaran gagal (${error.code ?? "error"}). Hubungi admin.`,
       };
     }
   } catch (e) {
