@@ -22,7 +22,7 @@ CREATE INDEX IF NOT EXISTS idx_users_nik ON users (nik);
 CREATE TABLE IF NOT EXISTS registrations (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL UNIQUE REFERENCES users (id) ON DELETE CASCADE,
-  paket_id TEXT NOT NULL CHECK (paket_id IN ('paket-1', 'paket-2', 'paket-3')),
+  paket_id TEXT NOT NULL CHECK (paket_id IN ('paket-1', 'paket-2')),
   status_pembayaran TEXT NOT NULL DEFAULT 'menunggu'
     CHECK (status_pembayaran IN ('menunggu', 'diproses', 'lunas', 'ditolak')),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()

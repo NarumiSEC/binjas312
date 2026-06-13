@@ -1,32 +1,26 @@
-import type { PaketOption } from "@/types";
+import type { PaketId } from "@/types";
 
-export const PAKET_OPTIONS: PaketOption[] = [
+export const PAKET_OPTIONS = [
   {
-    id: "paket-1",
-    nama: "Paket 1: Khusus Bina Fisik",
-    deskripsi: "Program pembinaan fisik intensif untuk persiapan seleksi.",
+    id: "paket-1" as PaketId,
+    nama: "Paket Khusus Bina Fisik",
+    deskripsi:
+      "Program pembinaan fisik intensif — ketahanan, kecepatan, dan kekuatan untuk persiapan seleksi.",
     biayaPendaftaran: 250_000,
     biayaBulanan: 100_000,
   },
   {
-    id: "paket-2",
-    nama: "Paket 2: Bina Fisik, Psi, & Akademik",
-    deskripsi: "Pembinaan fisik, psikologi, dan akademik — 1x pertemuan/minggu.",
+    id: "paket-2" as PaketId,
+    nama: "Paket Bina Fisik, Psi, & Akademik",
+    deskripsi:
+      "Pembinaan fisik, psikologi, dan akademik secara terpadu dalam satu program.",
     biayaPendaftaran: 300_000,
     biayaBulanan: 150_000,
-    pertemuanPerMinggu: 1,
+    highlight: true,
   },
-  {
-    id: "paket-3",
-    nama: "Paket 3: Bina Fisik, Psi, & Akademik",
-    deskripsi: "Pembinaan fisik, psikologi, dan akademik — 2x pertemuan/minggu.",
-    biayaPendaftaran: 350_000,
-    biayaBulanan: 175_000,
-    pertemuanPerMinggu: 2,
-  },
-];
+] as const;
 
-export function getPaketById(id: string): PaketOption | undefined {
+export function getPaketById(id: string) {
   return PAKET_OPTIONS.find((p) => p.id === id);
 }
 

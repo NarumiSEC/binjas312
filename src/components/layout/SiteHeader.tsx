@@ -3,6 +3,7 @@ import { getSafeSession } from "@/lib/auth/session";
 
 const nav = [
   { href: "/", label: "Beranda" },
+  { href: "/pendaftaran", label: "Pendaftaran" },
   { href: "/jadwal", label: "Jadwal" },
   { href: "/lokasi", label: "Lokasi" },
 ];
@@ -54,7 +55,7 @@ export async function SiteHeader() {
                 Masuk
               </Link>
               <Link
-                href="/register"
+                href="/pendaftaran"
                 className="rounded border border-gold-500 bg-gold-600 px-3 py-1.5 text-xs font-bold text-army-950 uppercase tracking-wide hover:bg-gold-500"
               >
                 Daftar

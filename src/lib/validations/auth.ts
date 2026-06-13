@@ -26,7 +26,7 @@ export const loginSchema = z.object({
 });
 
 export const paketSelectionSchema = z.object({
-  paketId: z.enum(["paket-1", "paket-2", "paket-3"]),
+  paketId: z.enum(["paket-1", "paket-2"]),
 });
 
 export type RegisterInput = z.infer<typeof registerSchema>;

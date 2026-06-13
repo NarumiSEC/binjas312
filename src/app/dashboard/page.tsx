@@ -1,9 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth, signOut } from "@/auth";
 import { getDashboardDataForSession } from "@/actions/registration";
-import { PaketCards } from "@/components/dashboard/PaketCards";
-import { StatusPendaftaran } from "@/components/dashboard/StatusPendaftaran";
-import type { RegistrationRecord, UserRecord } from "@/types";
+import { PaketSelectionFlow } from "@/components/dashboard/PaketSelectionFlow";
 
 export const metadata = {
   title: "Dashboard",
@@ -20,11 +18,10 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
-  const user = data.user as UserRecord;
-  const registration = data.registration as RegistrationRecord | null;
+  const user = data.user;
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-xs font-bold tracking-[0.2em] text-gold-500 uppercase">
@@ -49,18 +46,13 @@ export default async function DashboardPage() {
         </form>
       </div>
 
-      <div className="mt-10">
-        {registration ? (
-          <StatusPendaftaran user={user} registration={registration} />
-        ) : (
-          <>
-            <p className="mb-6 text-army-300">
-              Pilih salah satu paket pembinaan di bawah ini untuk melanjutkan
-              pendaftaran.
-            </p>
-            <PaketCards />
-          </>
-        )}
+      <p className="mt-6 text-army-300">
+        Pilih paket, isi biodata, lalu kirim ke WhatsApp admin untuk melanjutkan
+        pendaftaran.
+      </p>
+
+      <div className="mt-8">
+        <PaketSelectionFlow defaultNik={user.nik} defaultNama={user.nama} />
       </div>
     </div>
   );

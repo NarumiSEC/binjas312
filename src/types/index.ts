@@ -1,4 +1,4 @@
-export type PaketId = "paket-1" | "paket-2" | "paket-3";
+export type PaketId = "paket-1" | "paket-2";
 
 export type StatusPembayaran =
   | "menunggu"
@@ -12,7 +12,16 @@ export interface PaketOption {
   deskripsi: string;
   biayaPendaftaran: number;
   biayaBulanan: number;
-  pertemuanPerMinggu?: number;
+  highlight?: boolean;
+}
+
+export interface BiodataForm {
+  nik: string;
+  namaLengkap: string;
+  tanggalLahir: string;
+  riwayatPenyakit: string;
+  namaOrangTua: string;
+  alamat: string;
 }
 
 export interface UserRecord {

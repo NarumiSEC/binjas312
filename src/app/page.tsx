@@ -34,7 +34,7 @@ export default function HomePage() {
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
-              href="/register"
+              href="/pendaftaran"
               className="rounded bg-gold-600 px-6 py-3 text-sm font-bold tracking-widest text-army-950 uppercase hover:bg-gold-500"
             >
               Daftar Sekarang

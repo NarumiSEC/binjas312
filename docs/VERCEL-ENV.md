@@ -20,6 +20,8 @@ Setelah mengisi variabel, wajib **Redeploy** (Deployments → ⋮ → Redeploy).
 - Centang environment: **Production**, **Preview**, **Development**
 - Jangan pakai `http://localhost:3000` untuk `AUTH_URL` / `NEXT_PUBLIC_APP_URL` di production
 
+| `NEXT_PUBLIC_WA_ADMIN_NUMBER` | `6283148338260` (nomor admin WA) |
+
 ## Opsional
 
 | Variable | Catatan |
