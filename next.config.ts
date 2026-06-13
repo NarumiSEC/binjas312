@@ -1,13 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Reduces writes to .next/dev/types (avoids EPERM on some Windows setups)
   typedRoutes: false,
   poweredByHeader: false,
-  webpack: (config) => {
-    config.resolve.symlinks = false;
-    return config;
-  },
   async headers() {
     return [
       {
