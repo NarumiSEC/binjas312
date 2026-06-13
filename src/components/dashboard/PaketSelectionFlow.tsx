@@ -191,7 +191,7 @@ export function PaketSelectionFlow({ defaultNik = "", defaultNama = "" }: Props)
         <article
           key={paket.id}
           className={`flex flex-col rounded-lg border bg-army-900/80 p-6 shadow-lg ${
-            paket.highlight
+            paket.highlight ?? false
               ? "border-gold-500 ring-1 ring-gold-500/30"
               : "border-army-600"
           }`}
